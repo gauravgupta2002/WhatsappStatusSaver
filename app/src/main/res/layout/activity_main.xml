@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="#25D366"
     android:id="@+id/swipe">
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerview"
+        android:fitsSystemWindows="true">
 
     </androidx.recyclerview.widget.RecyclerView>
 
