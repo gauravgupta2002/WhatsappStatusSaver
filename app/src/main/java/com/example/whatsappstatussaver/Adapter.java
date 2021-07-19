@@ -1,6 +1,9 @@
 package com.example.whatsappstatussaver;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Picture;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +45,34 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         }
 
         Glide.with(context).load(modelClass.getUri()).into(holder.mainstatus);
+
+        holder.mainstatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(modelClass.getUri().toString().endsWith(".mp4")) {
+                    final String path = filelist.get(position).getPath();
+                    String destpath = Environment.getExternalStorageDirectory().getAbsolutePath() + Constant.SAVE_FOLDER_NAME;
+                    Intent intent = new Intent(context, Video.class);
+                    intent.putExtra("DEST_PATH_VIDEO", destpath);
+                    intent.putExtra("FILE_VIDEO", path);
+                    intent.putExtra("FILENAME_VIDEO",modelClass.getFilename());
+                    intent.putExtra("URI_VIDEO",modelClass.getUri().toString());
+                    context.startActivity(intent);
+
+                }
+                else {
+                    final String path = filelist.get(position).getPath();
+                    String destpath = Environment.getExternalStorageDirectory().getAbsolutePath() + Constant.SAVE_FOLDER_NAME;
+                    Intent intent = new Intent(context, Pictureclass.class);
+                    intent.putExtra("DEST_PATH", destpath);
+                    intent.putExtra("FILE", path);
+                    intent.putExtra("FILENAME",modelClass.getFilename());
+                    intent.putExtra("URI",modelClass.getUri().toString());
+                    context.startActivity(intent);
+
+                }
+            }
+        });
 
     }
 
